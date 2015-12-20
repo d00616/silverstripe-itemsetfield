@@ -194,7 +194,7 @@ abstract class ItemSetField extends FormField {
 		return $set;
 	}
 
-	function FieldHolder() {
+	function FieldHolder($properties = array()) {
 		Requirements::add_i18n_javascript('itemsetfield/javascript/lang');
 
 		$templates = array();
@@ -293,9 +293,7 @@ class ItemSetField_Item extends RequestHandler {
 		'$Action!' => 'handleAction',
 	);
 
-	function handleAction($request) {
-		$action = $request->param('Action');
-
+	function handleAction($request, $action) {
 		if (method_exists($this, $action) && $this->checkAccessAction($action)) {
 			return $this->$action($request);
 		}
